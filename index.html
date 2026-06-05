@@ -8,7 +8,7 @@
     --p-accent:#D4AF37;--p-white:#FAF8F3;
   }
   body{background:var(--p-black);color:var(--p-text);font-family:'Raleway',sans-serif;font-weight:300}
-  .dash{background:var(--p-black);min-height:100vh;padding:0}
+  .dash{background:var(--p-black);min-height:100vh;padding:0;margin:0 auto;max-width:1440px}
   .topbar{background:var(--p-black);border-bottom:1px solid var(--p-border);padding:18px 28px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:14px}
   .crest{width:40px;height:40px;background:var(--p-gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;color:var(--p-black);letter-spacing:1px}
@@ -31,6 +31,8 @@
   .kpi-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:1px;margin-top:6px;font-weight:500;letter-spacing:1px}
   .badge-up{background:rgba(197,160,40,0.15);color:var(--p-gold)}
   .main-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--p-border);padding:0}
+  .panel-grid{background:var(--p-border);display:grid;grid-template-columns:1fr 1fr;gap:1px}
+  .panel-grid.panel-full{grid-template-columns:1fr}
   .panel{background:var(--p-charcoal);padding:24px}
   .panel-full{background:var(--p-charcoal);padding:24px;grid-column:1/-1}
   .panel-title{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--p-gold);margin-bottom:20px;font-weight:500;display:flex;align-items:center;gap:8px}
@@ -55,10 +57,64 @@
   .pay-val{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--p-white);font-weight:400}
   .pay-pct{font-size:10px;color:var(--p-gold);margin-top:2px;letter-spacing:1px}
   .trend-section{margin-top:0}
-  .footer{background:var(--p-charcoal);border-top:1px solid var(--p-border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
+  .footer{background:var(--p-charcoal);border-top:1px solid var(--p-border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
   .footer-text{font-size:10px;color:var(--p-muted);letter-spacing:2px;text-transform:uppercase}
   select option{background:var(--p-mid);color:var(--p-text)}
   .separator{width:1px;height:30px;background:var(--p-border)}
+
+  @media (max-width: 1200px) {
+    .topbar{padding:18px 20px;gap:12px}
+    .filters{padding:14px 20px}
+    .filter-select{min-width:130px}
+    .kpi-row{grid-template-columns:repeat(2,1fr)}
+    .panel-grid{grid-template-columns:1fr 1fr}
+    .pay-grid{grid-template-columns:1fr 1fr}
+  }
+
+  @media (max-width: 900px) {
+    .dash{padding:0 16px}
+    .topbar{flex-wrap:wrap;justify-content:center;text-align:center}
+    .topbar-right{font-size:10px}
+    .filters{padding:14px 16px;justify-content:center}
+    .filter-group{flex:1 1 180px;min-width:140px}
+    .filter-btn{margin-left:0;width:100%;max-width:240px}
+    .kpi-row{grid-template-columns:1fr}
+    .panel-grid{grid-template-columns:1fr}
+    .pay-grid{grid-template-columns:1fr}
+    .panel{padding:20px}
+    .panel-title{margin-bottom:16px}
+    .bar-label{min-width:90px;font-size:10px}
+    .bar-count{font-size:10px}
+    .city-tab{font-size:9px;padding:6px 10px}
+    .footer{padding:14px 16px}
+  }
+
+  @media (max-width: 640px) {
+    body{font-size:14px}
+    .topbar{padding:14px 14px}
+    .brand-name{font-size:18px}
+    .brand-sub{letter-spacing:4px}
+    .filters{gap:10px}
+    .filter-group{flex:1 1 100%}
+    .filter-select{width:100%}
+    .filter-btn{padding:10px 16px}
+    .kpi-card{padding:18px}
+    .kpi-value{font-size:26px}
+    .panel{padding:18px}
+    .panel-title{font-size:8px;letter-spacing:4px}
+    .insight-box{padding:12px 14px}
+    .bar-row{gap:8px}
+    .bar-label{min-width:80px;text-align:left}
+    .city-tabs{justify-content:flex-start;overflow-x:auto;padding-bottom:6px}
+    .city-tabs::-webkit-scrollbar{height:6px}
+    .city-tabs::-webkit-scrollbar-thumb{background:var(--p-border);border-radius:3px}
+    .pay-item{padding:10px 12px}
+    .pay-name{font-size:10px}
+    .pay-val{font-size:16px}
+    .footer{padding:12px 14px}
+    .footer-text{font-size:9px}
+    .separator{display:none}
+  }
 </style>
 
 <div class="dash">
@@ -110,7 +166,7 @@
   <div class="kpi-row" id="kpi-row">
   </div>
 
-  <div style="background:var(--p-border);display:grid;grid-template-columns:1fr 1fr;gap:1px">
+  <div class="panel-grid">
     <div class="panel">
       <div class="panel-title">Modelos mais vendidos por unidade</div>
       <div id="top-models-chart"></div>
@@ -123,7 +179,7 @@
     </div>
   </div>
 
-  <div style="background:var(--p-border);display:grid;grid-template-columns:1fr 1fr;gap:1px">
+  <div class="panel-grid">
     <div class="panel">
       <div class="panel-title">Ano do modelo mais vendido</div>
       <div class="chart-wrap"><canvas id="year-chart" role="img" aria-label="Vendas por ano do modelo"></canvas></div>
@@ -135,7 +191,7 @@
     </div>
   </div>
 
-  <div style="background:var(--p-border);display:grid;grid-template-columns:1fr;gap:1px">
+  <div class="panel-grid panel-full">
     <div class="panel">
       <div class="panel-title">Tendência de vendas — receita acumulada por período</div>
       <div class="chart-wrap" style="height:200px"><canvas id="trend-chart" role="img" aria-label="Tendência de vendas ao longo do tempo"></canvas></div>
